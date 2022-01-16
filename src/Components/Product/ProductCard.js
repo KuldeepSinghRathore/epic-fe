@@ -1,19 +1,26 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useAuth } from "../../context/AuthProvider"
+import { useCartContext } from "../../context/CartProvider"
+import { addToCart } from "../../Utils/NetworkCalls"
+import { isAlreadyExist } from "../../Utils/PureFunctions"
 
 export const ProductCard = ({ product, buttonName }) => {
+  const navigate = useNavigate()
+  const { cartDispatch, cartState } = useCartContext()
   const {
-    _id,
     name,
     description,
     price,
     gender,
     type,
     image,
-
+    inStock,
     fastDelivery,
+    _id: productId,
   } = product
 
+  const { userId, token } = useAuth()
   const discountedPrice = price - parseInt((price * 15) / 100)
   return (
     <div className="flex justify-center items-center p-1 bg-purple-100 ">
@@ -28,7 +35,8 @@ export const ProductCard = ({ product, buttonName }) => {
             <div className="text-right">
               <button
                 className="text-pink-500 hover:text-pink-600 p-2 rounded-full"
-                style={{ background: "rgba(0,0,0,0.8)" }}
+                style={{ background: "rgba(0,0,0,0.1)" }}
+                onClick={() => navigate("/wishlist")}
               >
                 <svg className="w-6 h-6" viewBox="0 0 24 24">
                   <path
@@ -63,20 +71,49 @@ export const ProductCard = ({ product, buttonName }) => {
           <div className="flex justify-center items-center px-2 pb-2">
             <div className="w-1/2 p-1">
               <Link
-                to={`/product/${_id}`}
+                to={`/product/${productId}`}
                 className="bg-purple-600 rounded-full py-2 px-3 my-2 text-sm whitespace-nowrap text-white uppercase hover:bg-purple-700 flex flex-row justify-center"
               >
                 {buttonName ? buttonName : "View Details"}
               </Link>
             </div>
-            <div className="w-1/2 p-1">
-              <Link
-                to="/"
-                className="bg-gradient-to-r from-red-600 to-pink-500 rounded-full py-2 px-3 my-2 text-sm text-white hover:bg-pink-600 hover:from-pink-600 hover:to-pink-600 flex flex-row justify-center uppercase"
+            {/* <div
+              className="w-1/2 p-1
+               
+               bg-gradient-to-r from-red-600 to-pink-500 rounded-full py-2 px-3 my-2 text-sm text-white hover:bg-pink-600 hover:from-pink-600 hover:to-pink-600 flex flex-row justify-center uppercase"
+            >
+              Add to cart
+            </div> */}
+            {isAlreadyExist(productId, cartState.cart) ? (
+              <button
+                className="w-1/2 p-1
+               
+               bg-gradient-to-r from-red-600 to-pink-500 rounded-full py-2 px-3 my-2 text-sm text-white hover:bg-pink-600 hover:from-pink-600 hover:to-pink-600 flex flex-row justify-center uppercase"
+                disabled={!inStock}
+                onClick={() => navigate("/cart")}
               >
-                Add to cart
-              </Link>
-            </div>
+                Go to Cart
+              </button>
+            ) : (
+              <button
+                className="w-1/2 p-1
+               
+               bg-gradient-to-r from-red-600 to-pink-500 rounded-full py-2 px-3 my-2 text-sm text-white hover:bg-pink-600 hover:from-pink-600 hover:to-pink-600 flex flex-row justify-center uppercase"
+                disabled={!inStock}
+                onClick={() =>
+                  addToCart(
+                    productId,
+                    userId,
+                    token,
+                    product,
+                    cartDispatch,
+                    navigate
+                  )
+                }
+              >
+                {inStock ? "Add To Cart" : "Out of Stock"}
+              </button>
+            )}
           </div>
         </div>
       </div>

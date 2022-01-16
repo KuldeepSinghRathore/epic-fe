@@ -1,7 +1,44 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import axios from "axios"
+import React, { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { useAuth } from "../context/AuthProvider"
+import { API } from "../Utils/API"
 
 export const RegisterPage = () => {
+  const { token } = useAuth()
+  const navigate = useNavigate()
+  const [signUpDetails, setSignUpDetails] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  })
+  const [confirmPass, setConfirmPass] = useState("")
+  console.log(signUpDetails)
+  const handleChange = (e) => {
+    setSignUpDetails({
+      ...signUpDetails,
+      [e.target.name]: e.target.value,
+    })
+  }
+  const signUpHandler = async (e) => {
+    console.log(signUpDetails)
+    try {
+      e.preventDefault()
+      const { firstName, lastName, email, password } = signUpDetails
+      if (firstName && lastName && email && password) {
+        const response = await axios.post(`${API}/user/signup`, signUpDetails)
+        if (response.status === 200) {
+          navigate("/login")
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  if (token) {
+    navigate("/")
+  }
   return (
     <div className="h-screen">
       <br />
@@ -24,7 +61,7 @@ export const RegisterPage = () => {
         </p>
         <br />
 
-        <form>
+        <form onSubmit={signUpHandler}>
           <div className="flex justify-center">
             <div className="lg:w-1/3 md:w-2/3 w-full">
               <label
@@ -35,10 +72,12 @@ export const RegisterPage = () => {
               </label>
               <input
                 type="text"
-                name="text"
+                name="firstName"
                 placeholder="firstname"
                 className="bg-purple-200 appearance-none border-2 border-purple-200 rounded w-full 
                   py-2 px-4 text-purple-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                value={signUpDetails.firstName}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -51,8 +90,11 @@ export const RegisterPage = () => {
               <input
                 type="text"
                 placeholder="lastname"
+                name="lastName"
                 className="bg-purple-200 appearance-none border-2 border-purple-200 rounded w-full 
                   py-2 px-4 text-purple-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                value={signUpDetails.lastName}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -68,7 +110,8 @@ export const RegisterPage = () => {
               <input
                 type="email"
                 name="email"
-                id="email"
+                value={signUpDetails.email}
+                onChange={handleChange}
                 placeholder="*****@gmail.com"
                 className="bg-purple-200 appearance-none border-2 border-purple-200 rounded w-full 
                   py-2 px-4 text-purple-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
@@ -88,8 +131,26 @@ export const RegisterPage = () => {
               <input
                 type="password"
                 name="password"
-                id="password"
+                value={signUpDetails.password}
+                onChange={handleChange}
                 placeholder="*********"
+                minLength="6"
+                className="bg-purple-200 appearance-none border-2 border-purple-200 rounded w-full 
+                  py-2 px-4 text-purple-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                required
+              />
+            </div>
+          </div>
+          <div className="flex justify-center mt-4">
+            <div className="lg:w-1/3 md:w-2/3 w-full">
+              <label className="block uppercase tracking-wide text-purple-700 text-xs font-bold mb-2">
+                Confirm Password:
+              </label>
+              <input
+                type="password"
+                name="confirmPassword"
+                value={confirmPass}
+                onChange={(e) => setConfirmPass(e.target.value)}
                 className="bg-purple-200 appearance-none border-2 border-purple-200 rounded w-full 
                   py-2 px-4 text-purple-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 required
@@ -100,7 +161,9 @@ export const RegisterPage = () => {
           <div className="mt-4 flex justify-center">
             <button
               type="submit"
-              className="group w-full lg:w-1/3 md:w-2/3 py-2 px-4  border border-transparent text-sm leading-5 
+              value="SignUp"
+              disabled={signUpDetails.password !== confirmPass}
+              className="group w-full lg:w-1/3 md:w-2/3 py-2 px-4 cursor-pinter border border-transparent text-sm leading-5 
                 rounded-md text-white font-extrabold bg-purple-400 hover:bg-purple-500 focus:outline-none focus:border-purple-400 
                 focus:shadow-outline-purple active:bg-purple-400 active:outline-none transition duration-150 ease-in-out"
             >

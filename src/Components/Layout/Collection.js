@@ -1,6 +1,5 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { sample } from "../../assets/sample"
 import { ShowCollection } from "./ShowCollection"
 export const Collection = ({ arr, name }) => {
   return (

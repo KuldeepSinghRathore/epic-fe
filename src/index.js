@@ -6,16 +6,22 @@ import reportWebVitals from "./reportWebVitals"
 import { BrowserRouter } from "react-router-dom"
 import { DataProvider } from "./context/DataProvider"
 import { FilterProvider } from "./context/FilterProvider"
+import { CartProvider } from "./context/CartProvider"
+import { AuthProvider } from "./context/AuthProvider"
 
 ReactDOM.render(
   <React.StrictMode>
-    <FilterProvider>
-      <DataProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </DataProvider>
-    </FilterProvider>
+    <AuthProvider>
+      <FilterProvider>
+        <DataProvider>
+          <CartProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </CartProvider>
+        </DataProvider>
+      </FilterProvider>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById("root")
 )

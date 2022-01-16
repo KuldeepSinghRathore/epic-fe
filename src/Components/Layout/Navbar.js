@@ -1,9 +1,12 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useCartContext } from "../../context/CartProvider"
 import { useFilter } from "../../context/FilterProvider"
 
 export const Navbar = () => {
   const { filterState, filterDispatch } = useFilter()
+  const { cartState } = useCartContext()
+  const navigate = useNavigate()
   return (
     <div className="pt-16">
       <div className="fixed inset-x-0 top-0 h-16 items-center justify-between py-2 px-3 flex text-center shadow bg-purple-50">
@@ -61,28 +64,31 @@ export const Navbar = () => {
               9
             </span>
           </span>
-          <Link to="/cart">
-            <span className="relative inline-block">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-10 w-10 text-purple-300"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                />
-              </svg>
-              <span className="absolute top-0 right-0 px-2 py-1 text-xs font-bold leading-none text-purple-100 transform bg-purple-600 rounded-full">
-                9
-              </span>
+
+          <span
+            className="relative inline-block"
+            onClick={() => navigate("/cart")}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-10 w-10 text-purple-300"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+              />
+            </svg>
+            <span className="absolute top-0 right-0 px-2 py-1 text-xs font-bold leading-none text-purple-100 transform bg-purple-600 rounded-full">
+              {cartState?.cart?.length}
             </span>
-          </Link>
-          <span className=" inline-block">
+          </span>
+
+          <span className=" inline-block" onClick={() => navigate("/logout")}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-10 w-10 text-purple-300"

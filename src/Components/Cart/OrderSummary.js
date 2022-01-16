@@ -9,7 +9,7 @@ export const OrderSummary = ({ product }) => {
           <span className="font-semibold text-sm uppercase text-purple-500">
             {name}
           </span>
-          <span className="font-semibold text-sm">${price}</span>
+          <span className="font-semibold text-sm">₹{price}</span>
         </div>
       </div>
     </div>

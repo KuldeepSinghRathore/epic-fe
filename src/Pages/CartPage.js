@@ -1,9 +1,27 @@
-import React from "react"
+import React, { useEffect } from "react"
+import { useJwt } from "react-jwt"
+import { useNavigate } from "react-router-dom"
 import { CartCard } from "../Components/Cart/CartCard"
 import { CartItems } from "../Components/Cart/CartItems"
 import { OrderSummary } from "../Components/Cart/OrderSummary"
+import { useAuth } from "../context/AuthProvider"
+import { useCartContext } from "../context/CartProvider"
 
 export const CartPage = () => {
+  const { cartState, cartDispatch } = useCartContext()
+  const { isLogin } = useAuth()
+  const { isExpired } = useJwt()
+  // if (isExpired) {
+  //   localStorage.clear()
+  // }
+  const totalCart = cartState?.cart.reduce(
+    (acc, curr) => (acc = acc + curr?.product?.price * curr?.quantity),
+    0
+  )
+  const totalProductInCart = cartState?.cart.reduce(
+    (acc, curr) => (acc = acc + curr?.quantity),
+    0
+  )
   const sample = {
     _id: "61e0f37a1ca113ae184543b0",
     name: "Light Brown Shirt",
@@ -26,10 +44,13 @@ export const CartPage = () => {
           <CartItems />
         </div>
         <div className="overflow-y-auto h-[20vh] md:h-[50vh]">
-          <CartCard product={sample} />
-          <CartCard product={sample} />
-          <CartCard product={sample} />
-          <CartCard product={sample} />
+          {!cartState?.cart?.length > 0 ? (
+            <h2>No Item In Your Cart</h2>
+          ) : (
+            cartState?.cart.map((item) => {
+              return <CartCard product={item} key={item._id} />
+            })
+          )}
         </div>
       </div>
       <div className="flex-[0.2] bg-pink-50 md:bg-purple-50">
@@ -38,21 +59,18 @@ export const CartPage = () => {
             Order Summary
           </h1>
           <div className="overflow-y-auto h-[40vh]">
-            <OrderSummary product={sample} />
-            <OrderSummary product={sample} />
-            <OrderSummary product={sample} />
-            <OrderSummary product={sample} />
-            <OrderSummary product={sample} />
-            <OrderSummary product={sample} />
-            <OrderSummary product={sample} />
-            <OrderSummary product={sample} />
-            <OrderSummary product={sample} />
-            <OrderSummary product={sample} />
+            {!cartState?.cart?.length > 0 ? (
+              <h2>No Item In Your Cart</h2>
+            ) : (
+              cartState?.cart.map((item) => {
+                return <OrderSummary product={item.product} key={item._id} />
+              })
+            )}
           </div>
           <div className="border-t mt-8">
             <div className="flex font-semibold justify-between py-6 text-sm uppercase">
               <span>Total cost</span>
-              <span>$600</span>
+              <span>₹{totalCart}</span>
             </div>
             <button className="bg-purple-500 font-semibold hover:bg-purple-600 py-3 text-sm text-white uppercase w-full">
               Checkout

@@ -20,9 +20,8 @@ export const Filter = () => {
           <input
             type="radio"
             name="sort"
-            checked={filterState.sortBy === "lowtohigh"}
             onChange={() => filterDispatch({ type: "LOW_TO_HIGH" })}
-            readOnly
+            defaultChecked={filterState.sortBy === "lowtohigh"}
             className="form-radio text-purple-300"
           />
           <span className="ml-2">Low to High</span>
@@ -32,9 +31,8 @@ export const Filter = () => {
             type="radio"
             name="sort"
             className="form-radio text-purple-300"
-            checked={filterState.sortBy === "hightolow"}
             onChange={() => filterDispatch({ type: "HIGH_TO_LOW" })}
-            readOnly
+            defaultChecked={filterState.sortBy === "hightolow"}
           />
           <span className="ml-2">High to Low</span>
         </label>
@@ -42,7 +40,7 @@ export const Filter = () => {
           <input
             type="checkbox"
             className="h-4 w-4 checked:bg-purple-500"
-            checked={!filterState.showInventoryAll}
+            defaultChecked={!filterState.showInventoryAll}
             onClick={() => filterDispatch({ type: "SHOW_INVENTORY_ALL" })}
           />
           <span className="ml-2"> Out of Stock</span>
@@ -50,7 +48,7 @@ export const Filter = () => {
         <label className="p-1">
           <input
             type="checkbox"
-            checked={filterState.fastdelivery}
+            defaultChecked={filterState.fastdelivery}
             onClick={() => filterDispatch({ type: "FAST_DELIVERY" })}
             className="h-4 w-4 checked:bg-purple-500"
           />
