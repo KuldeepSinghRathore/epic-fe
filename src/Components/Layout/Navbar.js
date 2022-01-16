@@ -2,10 +2,12 @@ import React from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useCartContext } from "../../context/CartProvider"
 import { useFilter } from "../../context/FilterProvider"
+import { useWishListContext } from "../../context/WishListProvider"
 
 export const Navbar = () => {
   const { filterState, filterDispatch } = useFilter()
   const { cartState } = useCartContext()
+  const { wishlistState } = useWishListContext()
   const navigate = useNavigate()
   return (
     <div className="pt-16">
@@ -45,7 +47,10 @@ export const Navbar = () => {
           </span>
         </div>
         <div className="flex-1 flex justify-end gap-3">
-          <span className="relative inline-block ">
+          <span
+            className="relative inline-block "
+            onClick={() => navigate("/wishlist")}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-10 w-10 text-purple-300"
@@ -61,7 +66,7 @@ export const Navbar = () => {
               />
             </svg>
             <span className="absolute top-0 right-0 px-2 py-1 text-xs font-bold leading-none text-purple-100 transform bg-purple-600 rounded-full">
-              9
+              {wishlistState?.wishlist?.length}
             </span>
           </span>
 

@@ -24,13 +24,20 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/product" element={<ProductPage />} />
         <Route path="/product/:productId" element={<ProductDetail />} />
-        {/* <Route path="/cart" element={<CartPage />} /> */}
 
         <Route
           path="/cart"
           element={
             <PrivateRoutes>
               <CartPage />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/wishlist"
+          element={
+            <PrivateRoutes>
+              <WishlistPage />
             </PrivateRoutes>
           }
         />

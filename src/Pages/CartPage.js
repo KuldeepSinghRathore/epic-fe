@@ -18,25 +18,7 @@ export const CartPage = () => {
     (acc, curr) => (acc = acc + curr?.product?.price * curr?.quantity),
     0
   )
-  const totalProductInCart = cartState?.cart.reduce(
-    (acc, curr) => (acc = acc + curr?.quantity),
-    0
-  )
-  const sample = {
-    _id: "61e0f37a1ca113ae184543b0",
-    name: "Light Brown Shirt",
-    description: "Light Brown Shirt for Women",
-    price: 364,
-    gender: "women",
-    type: "shirt",
-    image: "https://image.ibb.co/nNmKz5/img2.jpg",
-    category: "clothes",
-    inStock: true,
-    fastDelivery: false,
-    created_at: "2022-01-14T03:52:26.838Z",
-    updatedAt: "2022-01-14T03:52:26.838Z",
-    __v: 0,
-  }
+
   return (
     <div className="flex flex-col md:flex-row h-[90vh]">
       <div className="flex-[0.8] bg-purple-100 ">
@@ -63,7 +45,9 @@ export const CartPage = () => {
               <h2>No Item In Your Cart</h2>
             ) : (
               cartState?.cart.map((item) => {
-                return <OrderSummary product={item.product} key={item._id} />
+                return (
+                  <OrderSummary product={item.product} key={item.product._id} />
+                )
               })
             )}
           </div>

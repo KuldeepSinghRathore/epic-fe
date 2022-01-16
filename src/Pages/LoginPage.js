@@ -87,7 +87,7 @@ export const LoginPage = () => {
     if (isLogin && userId) {
       getCartFromServer(userId, token)
     }
-  }, [isLogin, userId, token])
+  }, [])
 
   return (
     <>

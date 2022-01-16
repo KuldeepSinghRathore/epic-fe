@@ -8,17 +8,20 @@ import { DataProvider } from "./context/DataProvider"
 import { FilterProvider } from "./context/FilterProvider"
 import { CartProvider } from "./context/CartProvider"
 import { AuthProvider } from "./context/AuthProvider"
+import { WishlistProvider } from "./context/WishListProvider"
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
       <FilterProvider>
         <DataProvider>
-          <CartProvider>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </CartProvider>
+          <WishlistProvider>
+            <CartProvider>
+              <BrowserRouter>
+                <App />
+              </BrowserRouter>
+            </CartProvider>
+          </WishlistProvider>
         </DataProvider>
       </FilterProvider>
     </AuthProvider>
