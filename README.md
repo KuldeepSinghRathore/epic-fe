@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# ChessCart
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An E-commerce app built with React ⚛
 
-## Available Scripts
+### Preview
+![epic-ecommerce-homepage ]("./homepage.png)
+![epic-ecommerce-productPage]("./productpage.png)
+    
 
-In the project directory, you can run:
+Deployed app: [https://epic-ecommerce.netlify.app](https://epic-ecommerce.netlify.app)
 
-### `npm start`
+Backend source code (Express & Mongoose): [https://github.com/KuldeepSinghRathore/epic-backend](https://github.com/KuldeepSinghRathore/epic-backend)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Features:
+1. Local storage persistence of auth state
+2. Auth: Log in and Sign up
+3. Private and public routes: Private routes accessible only on login
+4. User actions like add/remove from cart, toggle wishlist
+5. Product page for each product
+6. Sort & filter products based on fast delivery, pricing, out of stock
+7. Search Functionality On Product Page
+8. Increment/decrement quantity in Cart page
+9. Total price with quantity shown in the checkout section
+10. Delivery Order functionality
+11. Responsive design for mobile and desktop
+12. React: useContext, useReducer, useEffect, useState, functional components
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### Features in progress/TODOs
+1. Improve loader 
+2. Toast Functionality
+3. Place/Cancel orders
+4. add/edit/delete payment details
+4. User Dashboard - View previous orders, saved payment details
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+Bootstrapped with `create-react-app`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Run Locally
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Get started
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Clone the repo:**
+```bash
+  $ git clone https://github.com/KuldeepSinghRathore/epic-fe.git
+```
+2. **Install required node modules:**
+```bash
+  $ yarn install
+```
+3. **Start the dev server:**
+```bash
+  $ yarn start
+```
+Open the `localhost` link in the browser.
+Happy hacking!       
 
-### `npm run eject`
+## 🔗 Links
+[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/__Kuldeep_Singh)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kuldeep--singh/)
