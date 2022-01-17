@@ -1,6 +1,8 @@
 import React from "react"
+import { useFilter } from "../../context/FilterProvider"
 
 export const Footer = () => {
+  const { setToggle, toggle } = useFilter()
   return (
     <div className="fixed inset-x-0 bottom-0">
       <div className="footer  bg-purple-50 border-t-2 h-3  border-gray-300 flex flex-row p-0 items-center m-0 justify-evenly text-center py-5 text-sm">
@@ -19,7 +21,10 @@ export const Footer = () => {
             />
           </svg>
         </div>
-        <button className=" md:hidden py-2 px-5 text-xl text-purple-100">
+        <button
+          onClick={() => setToggle(!toggle)}
+          className=" md:hidden py-2 px-5 text-xl text-blue-900"
+        >
           Filter & Sort
         </button>
         <p className="hidden">&copy; Copyright Reserved 2022</p>

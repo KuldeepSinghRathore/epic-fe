@@ -59,6 +59,7 @@ export const CheckOut = () => {
                 <input
                   name="street"
                   type="text"
+                  minLength="4"
                   value={AddressData.street}
                   onChange={handleAddressChange}
                   className="block w-full mt-1   border-gray-300 shadow-sm rounded-md"
@@ -69,6 +70,7 @@ export const CheckOut = () => {
                 <input
                   name="landmark"
                   type="text"
+                  minLength="3"
                   value={AddressData.landmark}
                   onChange={handleAddressChange}
                   className="
@@ -90,6 +92,7 @@ export const CheckOut = () => {
                 <input
                   name="city"
                   type="text"
+                  minLength="4"
                   value={AddressData.city}
                   onChange={handleAddressChange}
                   className="
@@ -111,6 +114,7 @@ export const CheckOut = () => {
                 <input
                   name="state"
                   type="text"
+                  minLength="3"
                   value={AddressData.state}
                   onChange={handleAddressChange}
                   className="
@@ -132,6 +136,8 @@ export const CheckOut = () => {
                 <input
                   name="pin"
                   type="text"
+                  minLength="6"
+                  maxLength="6"
                   value={AddressData.pin}
                   onChange={handleAddressChange}
                   className="
@@ -154,6 +160,8 @@ export const CheckOut = () => {
                 <input
                   name="mobile"
                   type="number"
+                  minLength="10"
+                  maxLength="10"
                   onChange={handleAddressChange}
                   value={AddressData.mobile}
                   className="

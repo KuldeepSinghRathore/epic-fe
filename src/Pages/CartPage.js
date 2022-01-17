@@ -1,16 +1,12 @@
-import React, { useEffect } from "react"
-import { useJwt } from "react-jwt"
+import React from "react"
 import { useNavigate } from "react-router-dom"
 import { CartCard } from "../Components/Cart/CartCard"
 import { CartItems } from "../Components/Cart/CartItems"
 import { OrderSummary } from "../Components/Cart/OrderSummary"
-import { useAuth } from "../context/AuthProvider"
 import { useCartContext } from "../context/CartProvider"
 
 export const CartPage = () => {
-  const { cartState, cartDispatch } = useCartContext()
-  const { isLogin } = useAuth()
-  const { isExpired } = useJwt()
+  const { cartState } = useCartContext()
 
   const navigate = useNavigate()
   const totalCart = cartState?.cart.reduce(
@@ -24,7 +20,7 @@ export const CartPage = () => {
         <div>
           <CartItems />
         </div>
-        <div className="overflow-y-auto h-[20vh] md:h-[50vh]">
+        <div className="overflow-y-auto h-[30vh] md:h-[50vh]">
           {!cartState?.cart?.length > 0 ? (
             <h2>No Item In Your Cart</h2>
           ) : (
@@ -39,7 +35,7 @@ export const CartPage = () => {
           <h1 className="font-semibold text-2xl border-b pb-8">
             Order Summary
           </h1>
-          <div className="overflow-y-auto h-[40vh]">
+          <div className="overflow-y-auto h-fit">
             {!cartState?.cart?.length > 0 ? (
               <h2>No Item In Your Cart</h2>
             ) : (

@@ -1,4 +1,4 @@
-const { createContext, useReducer, useContext } = require("react")
+const { createContext, useReducer, useContext, useState } = require("react")
 
 const FilterContext = createContext()
 
@@ -42,9 +42,12 @@ export const FilterProvider = ({ children }) => {
     price: 0,
     searchQuery: "",
   })
+  const [toggle, setToggle] = useState(false)
 
   return (
-    <FilterContext.Provider value={{ filterDispatch, filterState }}>
+    <FilterContext.Provider
+      value={{ filterDispatch, filterState, toggle, setToggle }}
+    >
       {children}
     </FilterContext.Provider>
   )

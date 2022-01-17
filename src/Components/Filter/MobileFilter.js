@@ -1,11 +1,11 @@
 import { useFilter } from "../../context/FilterProvider"
 
-export const Filter = () => {
+export const MobileFilter = () => {
   const { filterDispatch, filterState } = useFilter()
 
   return (
-    <div className="p-7 bg-purple-200 h-screen  md:w-[25vw] text-purple-800 ">
-      <fieldset className="flex flex-col">
+    <div className=" bg-purple-200    text-purple-800 ">
+      <fieldset className="flex flex-wrap items-center">
         <label className="p-1">
           <input
             type="radio"
@@ -58,7 +58,7 @@ export const Filter = () => {
               })
             }
           />
-          {filterState.price > 0 && filterState.price}
+          {filterState.price >= 0 && filterState.price}
         </label>
       </fieldset>
       <button

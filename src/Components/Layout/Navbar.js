@@ -9,6 +9,7 @@ export const Navbar = () => {
   const atHomePage = useLocation().pathname === "/"
   const { cartState } = useCartContext()
   const { wishlistState } = useWishListContext()
+
   const navigate = useNavigate()
   const cartItemsLength = cartState?.cart?.length
   const wishlistItemsLength = wishlistState?.wishlist?.length

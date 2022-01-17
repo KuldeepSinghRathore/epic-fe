@@ -7,6 +7,7 @@ import { API } from "../Utils/API"
 export const RegisterPage = () => {
   const { token } = useAuth()
   const navigate = useNavigate()
+  const [signUpError, setSignUpError] = useState("")
   const [signUpDetails, setSignUpDetails] = useState({
     firstName: "",
     lastName: "",
@@ -29,6 +30,12 @@ export const RegisterPage = () => {
         const response = await axios.post(`${API}/user/signup`, signUpDetails)
         if (response.status === 200) {
           navigate("/login")
+        }
+        if (response.status === 403) {
+          setSignUpError(response.data.message)
+        }
+        if (response.status === 400) {
+          setSignUpError(response.data.message)
         }
       }
     } catch (error) {
@@ -58,6 +65,7 @@ export const RegisterPage = () => {
           </span>
           <br />
         </p>
+        {signUpError && setSignUpError}
         <br />
 
         <form onSubmit={signUpHandler}>

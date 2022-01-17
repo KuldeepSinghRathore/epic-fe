@@ -161,6 +161,7 @@ export const LoginPage = () => {
                 <input
                   type="password"
                   name="password"
+                  minLength="6"
                   value={loginDetails.password}
                   onChange={handleChange}
                   autoComplete="off"

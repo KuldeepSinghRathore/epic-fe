@@ -1,5 +1,3 @@
-import { useEffect } from "react"
-import { useJwt } from "react-jwt"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthProvider"
 import { useCartContext } from "../context/CartProvider"
@@ -7,7 +5,6 @@ import { useWishListContext } from "../context/WishListProvider"
 
 export const LogOutPage = () => {
   const { setUserId, setToken, setIsLogin } = useAuth()
-  const { isExpired } = useJwt()
   const { cartDispatch } = useCartContext()
   const { wishlistDispatch } = useWishListContext()
   const navigate = useNavigate()
@@ -23,13 +20,25 @@ export const LogOutPage = () => {
   }
 
   return (
-    <div className="mx-auto w-4/5 ">
-      <h1>Want To Logout Out!!</h1>
+    <div className="mx-auto w-fit   flex flex-col ">
+      <h1 className="font-extrabold  mt-10 ">Want To Logout Out!!</h1>
       <button
-        className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+        className="bg-purple-500 mb-10  mt-10 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
         onClick={handleLogOut}
       >
         Log Out
+      </button>
+      <button
+        className="bg-purple-500 mb-10 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+        onClick={() => navigate("/")}
+      >
+        Home
+      </button>
+      <button
+        className="bg-purple-500 mb-10 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+        onClick={() => navigate("/product")}
+      >
+        Shop
       </button>
     </div>
   )

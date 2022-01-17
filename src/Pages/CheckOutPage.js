@@ -37,16 +37,16 @@ export const CheckOutPage = () => {
         {!addressState.address.length > 0 && (
           <>
             <h1>There is No Saved Address Please Fill The Address</h1>
-            <CheckOut />
           </>
         )}
+        <CheckOut />
       </div>
 
       <div>
         {addressState.address.length > 0 &&
-          addressState.address.map((address) => {
+          addressState.address.map((address, index) => {
             return (
-              <div key={address._id} className="border-2 p-5">
+              <div key={index?.toString()} className="border-2 p-5">
                 <div>
                   <p className="pb-1 text-purple-300">
                     <span className=" font-bold text-purple-800">street: </span>{" "}
