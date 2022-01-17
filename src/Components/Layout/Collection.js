@@ -7,7 +7,10 @@ export const Collection = ({ arr, name }) => {
       <div className="my-2 z-0 ">
         <div className="flex flex-row justify-between p-5">
           <h2 className="text-3xl">{name && name} Collection</h2>
-          <Link to="/" className="flex flex-row text-lg hover:text-purple-700">
+          <Link
+            to="/product"
+            className="flex flex-row text-lg hover:text-purple-700"
+          >
             View All
             <svg
               xmlns="http://www.w3.org/2000/svg"

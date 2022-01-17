@@ -18,7 +18,7 @@ const useWindowSize = () => {
   return size
 }
 export const ProductPage = () => {
-  const [width] = useWindowSize()
+  const [height, width] = useWindowSize()
   const { toggle } = useFilter()
   return (
     // <div className="flex  justify-between bg-purple-200 h-screen">
