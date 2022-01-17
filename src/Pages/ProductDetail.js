@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useAuth } from "../context/AuthProvider"
 import { useCartContext } from "../context/CartProvider"
 import { useData } from "../context/DataProvider"

@@ -3,7 +3,7 @@ import { ProductCard } from "../Components/Product/ProductCard"
 import { useWishListContext } from "../context/WishListProvider"
 
 export const WishlistPage = () => {
-  const { wishlistState, wishlistDispatch } = useWishListContext()
+  const { wishlistState } = useWishListContext()
 
   return (
     <div className="flex  -z-50 h-screen bg-purple-100 gap-3 py-5 p-1 flex-wrap">

@@ -32,37 +32,38 @@ export const AddressProvider = ({ children }) => {
       })
     }
   }
-  const addAddress = async (address, token) => {
-    const { status, data } = await axios.post(
-      `${API}/address/`,
-      {
-        address,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-    if (status === 401) {
-      setIsLogin(false)
-      setToken(null)
-      setUserId(null)
-      localStorage.removeItem("userInfo")
-    }
-    if (status === 200) {
-      addressDispatch({
-        type: "ADD_ADDRESS",
-        payload: data.address,
-      })
-    }
-  }
+  // const addAddress = async (address, token) => {
+  //   const { status, data } = await axios.post(
+  //     `${API}/address/`,
+  //     {
+  //       address,
+  //     },
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     }
+  //   )
+  //   if (status === 401) {
+  //     setIsLogin(false)
+  //     setToken(null)
+  //     setUserId(null)
+  //     localStorage.removeItem("userInfo")
+  //   }
+  //   if (status === 200) {
+  //     addressDispatch({
+  //       type: "ADD_ADDRESS",
+  //       payload: data.address,
+  //     })
+  //   }
+  // }
 
   //  useEffect to fetch address from server
   useEffect(() => {
     if (token && userId && isLogin) {
       fetchAddress(token)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, userId, isLogin])
 
   const values = { addressState, addressDispatch }

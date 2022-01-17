@@ -18,12 +18,11 @@ const useWindowSize = () => {
   return size
 }
 export const ProductPage = () => {
-  const [height, width] = useWindowSize()
+  const [width] = useWindowSize()
   const { toggle } = useFilter()
   return (
     // <div className="flex  justify-between bg-purple-200 h-screen">
     <div className=" bg-purple-200 ">
-      height:{height} width:{width}
       {width < 700 ? (
         <div className=" fixed  bottom-10 left-0  md:block">
           {toggle && <MobileFilter />}
