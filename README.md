@@ -3,11 +3,13 @@
 An E-commerce app built with React ⚛
 
 ### Preview
-![epic-ecommerce-homepage ]("./homepage.png)
-![epic-ecommerce-productPage]("./productpage.png)
+Deployed app: [https://epic-ecommerce.netlify.app](https://epic-ecommerce.netlify.app)
+#Home Page
+![epic-ecommerce-homepage ](homepage.png)
+#Product Page
+![epic-ecommerce-productPage](productpage.png)
     
 
-Deployed app: [https://epic-ecommerce.netlify.app](https://epic-ecommerce.netlify.app)
 
 Backend source code (Express & Mongoose): [https://github.com/KuldeepSinghRathore/epic-backend](https://github.com/KuldeepSinghRathore/epic-backend)
 
