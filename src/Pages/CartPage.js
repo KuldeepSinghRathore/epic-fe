@@ -11,9 +11,8 @@ export const CartPage = () => {
   const { cartState, cartDispatch } = useCartContext()
   const { isLogin } = useAuth()
   const { isExpired } = useJwt()
-  // if (isExpired) {
-  //   localStorage.clear()
-  // }
+
+  const navigate = useNavigate()
   const totalCart = cartState?.cart.reduce(
     (acc, curr) => (acc = acc + curr?.product?.price * curr?.quantity),
     0
@@ -30,7 +29,7 @@ export const CartPage = () => {
             <h2>No Item In Your Cart</h2>
           ) : (
             cartState?.cart.map((item) => {
-              return <CartCard product={item} key={item._id} />
+              return <CartCard product={item} key={item.product._id} />
             })
           )}
         </div>
@@ -56,7 +55,10 @@ export const CartPage = () => {
               <span>Total cost</span>
               <span>₹{totalCart}</span>
             </div>
-            <button className="bg-purple-500 font-semibold hover:bg-purple-600 py-3 text-sm text-white uppercase w-full">
+            <button
+              className="bg-purple-500 font-semibold hover:bg-purple-600 py-3 text-sm text-white uppercase w-full"
+              onClick={() => navigate("/checkout")}
+            >
               Checkout
             </button>
           </div>

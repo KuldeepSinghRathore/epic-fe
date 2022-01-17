@@ -14,7 +14,6 @@ export const RegisterPage = () => {
     password: "",
   })
   const [confirmPass, setConfirmPass] = useState("")
-  console.log(signUpDetails)
   const handleChange = (e) => {
     setSignUpDetails({
       ...signUpDetails,
@@ -74,6 +73,7 @@ export const RegisterPage = () => {
                 type="text"
                 name="firstName"
                 placeholder="firstname"
+                autoComplete="off"
                 className="bg-purple-200 appearance-none border-2 border-purple-200 rounded w-full 
                   py-2 px-4 text-purple-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 value={signUpDetails.firstName}
@@ -90,6 +90,7 @@ export const RegisterPage = () => {
               <input
                 type="text"
                 placeholder="lastname"
+                autoComplete="off"
                 name="lastName"
                 className="bg-purple-200 appearance-none border-2 border-purple-200 rounded w-full 
                   py-2 px-4 text-purple-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
@@ -113,6 +114,7 @@ export const RegisterPage = () => {
                 value={signUpDetails.email}
                 onChange={handleChange}
                 placeholder="*****@gmail.com"
+                autoComplete="off"
                 className="bg-purple-200 appearance-none border-2 border-purple-200 rounded w-full 
                   py-2 px-4 text-purple-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 required
@@ -134,6 +136,7 @@ export const RegisterPage = () => {
                 value={signUpDetails.password}
                 onChange={handleChange}
                 placeholder="*********"
+                autoComplete="off"
                 minLength="6"
                 className="bg-purple-200 appearance-none border-2 border-purple-200 rounded w-full 
                   py-2 px-4 text-purple-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
@@ -150,6 +153,8 @@ export const RegisterPage = () => {
                 type="password"
                 name="confirmPassword"
                 value={confirmPass}
+                autoComplete="off"
+                placeholder="*********"
                 onChange={(e) => setConfirmPass(e.target.value)}
                 className="bg-purple-200 appearance-none border-2 border-purple-200 rounded w-full 
                   py-2 px-4 text-purple-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"

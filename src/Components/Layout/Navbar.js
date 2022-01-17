@@ -1,14 +1,17 @@
 import React from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useCartContext } from "../../context/CartProvider"
 import { useFilter } from "../../context/FilterProvider"
 import { useWishListContext } from "../../context/WishListProvider"
 
 export const Navbar = () => {
   const { filterState, filterDispatch } = useFilter()
+  const atHomePage = useLocation().pathname === "/"
   const { cartState } = useCartContext()
   const { wishlistState } = useWishListContext()
   const navigate = useNavigate()
+  const cartItemsLength = cartState?.cart?.length
+  const wishlistItemsLength = wishlistState?.wishlist?.length
   return (
     <div className="pt-16">
       <div className="fixed inset-x-0 top-0 h-16 items-center justify-between py-2 px-3 flex text-center shadow bg-purple-50">
@@ -22,7 +25,10 @@ export const Navbar = () => {
         <div className="flex-1 flex justify-end  p-1 border-2 ">
           <input
             type="text"
-            placeholder="Search..."
+            placeholder={
+              atHomePage ? "Works At Product Page Use Shop Now" : "Search"
+            }
+            disabled={atHomePage}
             value={filterState.searchQuery}
             className="w-full focus-within:text-purple-600 placeholder-purple-500 outline-purple-700 "
             onChange={(e) =>
@@ -53,7 +59,7 @@ export const Navbar = () => {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-10 w-10 text-purple-300"
+              className="h-10 w-10 text-purple-900"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -65,8 +71,12 @@ export const Navbar = () => {
                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
               />
             </svg>
-            <span className="absolute top-0 right-0 px-2 py-1 text-xs font-bold leading-none text-purple-100 transform bg-purple-600 rounded-full">
-              {wishlistState?.wishlist?.length}
+            <span
+              className={`absolute top-0 right-0 px-2 py-1 text-xs font-bold leading-none text-purple-100 transform ${
+                !wishlistItemsLength > 0 ? "hidden" : `bg-purple-600`
+              } rounded-full`}
+            >
+              {wishlistItemsLength > 0 && wishlistItemsLength}
             </span>
           </span>
 
@@ -76,7 +86,7 @@ export const Navbar = () => {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-10 w-10 text-purple-300"
+              className="h-10 w-10 text-purple-900"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -88,15 +98,19 @@ export const Navbar = () => {
                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
               />
             </svg>
-            <span className="absolute top-0 right-0 px-2 py-1 text-xs font-bold leading-none text-purple-100 transform bg-purple-600 rounded-full">
-              {cartState?.cart?.length}
+            <span
+              className={`${
+                !cartItemsLength > 0 && "hidden"
+              } absolute top-0 right-0 px-2 py-1 text-xs font-bold leading-none text-purple-100 transform bg-purple-600 rounded-full`}
+            >
+              {cartItemsLength > 0 && cartItemsLength}
             </span>
           </span>
 
           <span className=" inline-block" onClick={() => navigate("/logout")}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-10 w-10 text-purple-300"
+              className="h-10 w-10 text-purple-900"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

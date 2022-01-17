@@ -1,10 +1,10 @@
-import { Route, Routes, useNavigate } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 import "./App.css"
 
 import { Footer } from "./Components/Layout/Footer"
 import { Navbar } from "./Components/Layout/Navbar"
-import { useAuth } from "./context/AuthProvider"
 import { CartPage } from "./Pages/CartPage"
+import { CheckOutPage } from "./Pages/CheckOutPage"
 import { HomePage } from "./Pages/HomePage"
 import { LoginPage } from "./Pages/LoginPage"
 import { LogOutPage } from "./Pages/LogOutPage"
@@ -17,7 +17,7 @@ import { PrivateRoutes } from "./Utils/PrivateRoutes"
 
 function App() {
   return (
-    <div className="h-screen">
+    <div className="h-screen select-none">
       <Navbar />
 
       <Routes>
@@ -38,6 +38,14 @@ function App() {
           element={
             <PrivateRoutes>
               <WishlistPage />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <PrivateRoutes>
+              <CheckOutPage />
             </PrivateRoutes>
           }
         />

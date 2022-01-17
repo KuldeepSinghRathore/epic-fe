@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../context/AuthProvider"
 import { useCartContext } from "../../context/CartProvider"
 import {
@@ -12,7 +12,6 @@ export const CartCard = ({ product }) => {
   const navigate = useNavigate()
   const { userId, token } = useAuth()
   const { name, price, type, image, _id: productId } = product.product
-  console.log(productId)
   const { cartDispatch } = useCartContext()
   return (
     <div className="    flex items-center hover:bg-purple-100 p-8 pt-0">

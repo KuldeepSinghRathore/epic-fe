@@ -1,24 +1,76 @@
-import React from "react"
+import axios from "axios"
+import React, { useState } from "react"
+import { useAddress } from "../../context/AddressProvider"
+import { useAuth } from "../../context/AuthProvider"
+import { API } from "../../Utils/API"
 export const CheckOut = () => {
+  const { addressDispatch } = useAddress()
+  const { token } = useAuth()
+  const [AddressData, setAddressData] = useState({
+    city: "",
+    state: "",
+    street: "",
+    landmark: "",
+    pin: "",
+    mobile: "",
+  })
+  const handleAddressChange = (e) => {
+    setAddressData({
+      ...AddressData,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      const { status } = await axios.post(`${API}/address/`, AddressData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      if (status === 200) {
+        addressDispatch({
+          type: "ADD_TO_ADDRESS",
+          payload: AddressData,
+        })
+        setAddressData({
+          city: "",
+          state: "",
+          street: "",
+          landmark: "",
+          pin: "",
+          mobile: "",
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div>
       <div>
         <div className="w-full md:w-96 md:max-w-full mx-auto">
           <div className="p-6 border border-gray-300 sm:rounded-md">
-            <form>
+            <form onSubmit={handleSubmit}>
               <label className="block mb-2">
-                <span className="text-gray-700">Address line 1</span>
+                <span className="text-gray-700">Street</span>
                 <input
-                  name="address1"
+                  name="street"
                   type="text"
+                  value={AddressData.street}
+                  onChange={handleAddressChange}
                   className="block w-full mt-1   border-gray-300 shadow-sm rounded-md"
                 />
               </label>
               <label className="block mb-2">
-                <span className="text-gray-700">Address line 2</span>
+                <span className="text-gray-700">LandMark</span>
                 <input
-                  name="address2"
+                  name="landmark"
                   type="text"
+                  value={AddressData.landmark}
+                  onChange={handleAddressChange}
                   className="
       block
       w-full
@@ -31,7 +83,6 @@ export const CheckOut = () => {
       focus:ring-indigo-200
       focus:ring-opacity-50
     "
-                  placeholder
                 />
               </label>
               <label className="block mb-2">
@@ -39,6 +90,8 @@ export const CheckOut = () => {
                 <input
                   name="city"
                   type="text"
+                  value={AddressData.city}
+                  onChange={handleAddressChange}
                   className="
       block
       w-full
@@ -51,7 +104,6 @@ export const CheckOut = () => {
       focus:ring-indigo-200
       focus:ring-opacity-50
     "
-                  placeholder
                 />
               </label>
               <label className="block mb-2">
@@ -59,6 +111,8 @@ export const CheckOut = () => {
                 <input
                   name="state"
                   type="text"
+                  value={AddressData.state}
+                  onChange={handleAddressChange}
                   className="
       block
       w-full
@@ -71,14 +125,15 @@ export const CheckOut = () => {
       focus:ring-indigo-200
       focus:ring-opacity-50
     "
-                  placeholder
                 />
               </label>
               <label className="block mb-2">
-                <span className="text-gray-700">Zip/Postal code</span>
+                <span className="text-gray-700">Pin code</span>
                 <input
-                  name="zip"
+                  name="pin"
                   type="text"
+                  value={AddressData.pin}
+                  onChange={handleAddressChange}
                   className="
       block
       w-full
@@ -91,15 +146,16 @@ export const CheckOut = () => {
       focus:ring-indigo-200
       focus:ring-opacity-50
     "
-                  placeholder
                 />
               </label>
 
               <label className="block mb-2">
                 <span className="text-gray-700">Mobile</span>
                 <input
-                  name="telephone"
-                  type="text"
+                  name="mobile"
+                  type="number"
+                  onChange={handleAddressChange}
+                  value={AddressData.mobile}
                   className="
       block
       w-full

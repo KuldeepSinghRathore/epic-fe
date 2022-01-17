@@ -4,18 +4,8 @@ export const Filter = () => {
   const { filterDispatch, filterState } = useFilter()
 
   return (
-    <div className="p-7 bg-purple-200 h-screen w-[25vw] text-purple-800 ">
+    <div className="p-7 bg-purple-200 h-screen  md:w-[25vw] text-purple-800 ">
       <fieldset className="flex flex-col">
-        {/* <label className="p-1">
-          <input
-            type="text"
-            placeholder="Search.."
-            className="focus-within:text-purple-600 placeholder-purple-500 outline-purple-700 border-4 border-purple-200"
-            // onChange={(e) =>
-            //   filterDispatch({ type: "SEARCH", payload: e.target.value })
-            // }
-          />
-        </label> */}
         <label className="p-1">
           <input
             type="radio"

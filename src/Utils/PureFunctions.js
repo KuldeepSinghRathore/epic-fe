@@ -35,8 +35,6 @@ export const FilterCollections = (arr, selectedGender) => {
 
 // cart and wishlist
 export const isAlreadyExist = (id, cartToCheck) => {
-  // console.log("_id", id, "cart", cartToCheck)
-
   const isExist = cartToCheck.findIndex((item) => item?.product?._id === id)
   if (isExist === -1) {
     return false

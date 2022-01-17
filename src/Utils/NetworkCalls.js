@@ -100,7 +100,9 @@ export const getwishlistServer = async (userId, token) => {
     })
     return response
   } catch (error) {
-    console.log(error)
+    if (error?.response?.status !== 404) {
+      console.log(error)
+    }
   }
 }
 

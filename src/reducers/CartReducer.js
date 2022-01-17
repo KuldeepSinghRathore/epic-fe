@@ -1,5 +1,4 @@
 export const CartReducer = (state, action) => {
-  console.log(action.payload, "to be removed")
   switch (action.type) {
     case "LOAD_CART":
       return {

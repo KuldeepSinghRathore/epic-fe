@@ -4,7 +4,6 @@ export const WishListReducer = (state, action) => {
       return { ...state, wishlist: action.payload }
 
     case "ADD_TO_WISHLIST":
-      console.log("ADD_TO_wishlist", action.payload)
       return {
         ...state,
         wishlist: [
@@ -13,12 +12,6 @@ export const WishListReducer = (state, action) => {
         ],
       }
     case "REMOVE_FROM_WISHLIST":
-      console.log(
-        "REMOVE_FROM_wishlist",
-        action.payload,
-        "state.wishlist",
-        state.wishlist
-      )
       return {
         ...state,
         wishlist: state.wishlist.filter(

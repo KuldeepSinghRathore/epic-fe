@@ -15,11 +15,8 @@ export const WishlistProvider = ({ children }) => {
       try {
         if (token && userId) {
           const response = await getwishlistServer(userId, token)
-          console.log(
-            "response.data.wishlist.wishlistItems",
-            response.data.wishlist.wishlistItems
-          )
-          if (response.status === 200) {
+
+          if (response?.status === 200) {
             wishlistDispatch({
               type: "LOAD_WISHLIST",
               payload: response.data.wishlist.wishlistItems,

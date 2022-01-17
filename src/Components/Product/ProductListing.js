@@ -9,13 +9,15 @@ export const ProductListing = () => {
   const { filterState } = useFilter()
   const sortedData = getSortedData(productData, filterState.sortBy)
   const filteredData = getFilteredData(sortedData, filterState)
-  console.log("productData", productData)
   return (
     <div className="flex  -z-50 w-[75vw] bg-purple-100 gap-3 py-5 p-1 flex-wrap">
-      {filteredData.length > 0 &&
+      {!filteredData.length > 0 ? (
+        <h1>Nothing Match Your Search Term Use Clear Filter</h1>
+      ) : (
         filteredData.map((product) => (
           <ProductCard product={product} key={product._id} />
-        ))}
+        ))
+      )}
     </div>
   )
 }

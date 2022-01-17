@@ -1,8 +1,6 @@
 import React from "react"
 
 export const Footer = () => {
-  const path = window.location.pathname
-  console.log(path)
   return (
     <div className="fixed inset-x-0 bottom-0">
       <div className="footer  bg-purple-50 border-t-2 h-3  border-gray-300 flex flex-row p-0 items-center m-0 justify-evenly text-center py-5 text-sm">

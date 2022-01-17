@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useState } from "react"
 import axios from "axios"
 import { useJwt } from "react-jwt"
 export const AuthContext = createContext()
@@ -23,15 +23,6 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(savedToken)
   const [isLogin, setIsLogin] = useState(savedIsLogin)
   const { isExpired } = useJwt(token)
-
-  // useEffect(() => {
-  //   console.log(
-  //     { isExpired },
-  //     "from auth provider",
-  //     { isLogin },
-  //     "from auth provider"
-  //   )
-  // }, [isExpired, isLogin])
 
   return (
     <AuthContext.Provider

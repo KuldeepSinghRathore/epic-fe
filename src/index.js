@@ -9,20 +9,23 @@ import { FilterProvider } from "./context/FilterProvider"
 import { CartProvider } from "./context/CartProvider"
 import { AuthProvider } from "./context/AuthProvider"
 import { WishlistProvider } from "./context/WishListProvider"
+import { AddressProvider } from "./context/AddressProvider"
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
       <FilterProvider>
-        <DataProvider>
-          <WishlistProvider>
-            <CartProvider>
-              <BrowserRouter>
-                <App />
-              </BrowserRouter>
-            </CartProvider>
-          </WishlistProvider>
-        </DataProvider>
+        <AddressProvider>
+          <DataProvider>
+            <WishlistProvider>
+              <CartProvider>
+                <BrowserRouter>
+                  <App />
+                </BrowserRouter>
+              </CartProvider>
+            </WishlistProvider>
+          </DataProvider>
+        </AddressProvider>
       </FilterProvider>
     </AuthProvider>
   </React.StrictMode>,

@@ -3,12 +3,13 @@ import { useJwt } from "react-jwt"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthProvider"
 import { useCartContext } from "../context/CartProvider"
+import { useWishListContext } from "../context/WishListProvider"
 
 export const LogOutPage = () => {
   const { setUserId, setToken, setIsLogin } = useAuth()
   const { isExpired } = useJwt()
-  const { cartDispatch, logout } = useCartContext()
-  //   const { wishlistDispatch } = useWishListContext()
+  const { cartDispatch } = useCartContext()
+  const { wishlistDispatch } = useWishListContext()
   const navigate = useNavigate()
   const handleLogOut = () => {
     localStorage.removeItem("userInfo")
@@ -16,7 +17,7 @@ export const LogOutPage = () => {
     setToken(null)
 
     cartDispatch({ type: "CLEAR_SESSION" })
-    // wishlistDispatch({ type: "CLEAR_SESSION" })
+    wishlistDispatch({ type: "CLEAR_SESSION" })
     setIsLogin(false)
     navigate("/")
   }
