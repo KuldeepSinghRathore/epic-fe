@@ -1,4 +1,4 @@
-# ChessCart
+# Epic
 
 An E-commerce app built with React ⚛
 
