@@ -1,6 +1,7 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 import { setUpAuthHeaders, useAuth } from "../context/AuthProvider"
 import { useCartContext } from "../context/CartProvider"
 import { API } from "../Utils/API"
@@ -103,7 +104,7 @@ export const LoginPage = () => {
 
   return (
     <>
-      <div className="text-center">{error && error}</div>
+      <div className="text-center">{error}</div>
       <div className="signIn-page">
         <br />
 
@@ -190,6 +191,15 @@ export const LoginPage = () => {
                 rounded-md text-white font-extrabold bg-purple-400 hover:bg-purple-500 focus:outline-none focus:border-purple-400 
                 focus:shadow-outline-purple active:bg-purple-400 active:outline-none transition duration-150 ease-in-out bg-gradient-to-r from-red-600 to-pink-500 "
               onClick={(e) => {
+                toast("🦄 Logging In..!", {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                })
                 handleLogin(e, true)
               }}
             >

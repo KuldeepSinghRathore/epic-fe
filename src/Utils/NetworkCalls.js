@@ -1,5 +1,6 @@
 import { API } from "../Utils/API"
 import axios from "axios"
+import { toast } from "react-toastify"
 export const getAllProducts = async () => {
   try {
     const response = await axios.get(`${API}/api/products`)
@@ -152,6 +153,15 @@ export const removeFromwishlist = async (
   navigate
 ) => {
   if (token) {
+    toast("🦄 Remove From Wishlist!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
     const status = await removeFromwishlistServer(productId, userId, token)
     if (status === 200) {
       dispatch({
@@ -174,7 +184,17 @@ export const addToCart = async (
   navigate
 ) => {
   if (token) {
+    toast("🦄 Add to Cart!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
     const status = await addToCartServer(productId, userId, token, item)
+
     if (status === 200) {
       dispatch({ type: "ADD_TO_CART", payload: item })
     } else {
@@ -192,6 +212,15 @@ export const removeFromCart = async (
   navigate
 ) => {
   if (token) {
+    toast("🦄 Remove From Cart!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
     const status = await removeFromCartServer(productId, userId, token)
     if (status === 200) {
       dispatch({ type: "REMOVE_FROM_CART", payload: productId })
@@ -211,6 +240,15 @@ export const increaseQuantity = async (
   navigate,
   dispatch
 ) => {
+  toast("🦄 Increasing Quantity!", {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  })
   const quantity = item?.quantity + 1
   if (token) {
     const status = await increaseQuantityServer(
@@ -242,6 +280,15 @@ export const decreaseQuantity = async (
   const quantity = item?.quantity - 1
   if (quantity > 0) {
     if (token) {
+      toast("🦄 Decreasing Quantity!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
       const status = await decreaseQuantityServer(
         productId,
         userId,
@@ -249,6 +296,7 @@ export const decreaseQuantity = async (
         token,
         quantity
       )
+
       if (status === 200) {
         dispatch({
           type: "DECREASE_QUANTITY",

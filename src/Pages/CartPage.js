@@ -1,5 +1,6 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 import { CartCard } from "../Components/Cart/CartCard"
 import { CartItems } from "../Components/Cart/CartItems"
 import { OrderSummary } from "../Components/Cart/OrderSummary"
@@ -10,7 +11,7 @@ export const CartPage = () => {
 
   const navigate = useNavigate()
   const totalCart = cartState?.cart.reduce(
-    (acc, curr) => (acc = acc + curr?.product?.price * curr?.quantity),
+    (acc, curr) => (acc += curr?.product?.price * curr?.quantity),
     0
   )
 
@@ -24,9 +25,9 @@ export const CartPage = () => {
           {!cartState?.cart?.length > 0 ? (
             <h2>No Item In Your Cart</h2>
           ) : (
-            cartState?.cart.map((item) => {
-              return <CartCard product={item} key={item.product._id} />
-            })
+            cartState?.cart.map((item) => (
+              <CartCard product={item} key={item.product._id} />
+            ))
           )}
         </div>
       </div>
@@ -39,11 +40,9 @@ export const CartPage = () => {
             {!cartState?.cart?.length > 0 ? (
               <h2>No Item In Your Cart</h2>
             ) : (
-              cartState?.cart.map((item) => {
-                return (
-                  <OrderSummary product={item.product} key={item.product._id} />
-                )
-              })
+              cartState?.cart.map((item) => (
+                <OrderSummary product={item.product} key={item.product._id} />
+              ))
             )}
           </div>
           <div className="border-t mt-8">
@@ -53,7 +52,18 @@ export const CartPage = () => {
             </div>
             <button
               className="bg-purple-500 font-semibold hover:bg-purple-600 py-3 text-sm text-white uppercase w-full"
-              onClick={() => navigate("/checkout")}
+              onClick={() => {
+                toast("🦄 Check Out!", {
+                  position: "top-right",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                })
+                navigate("/checkout")
+              }}
             >
               Checkout
             </button>

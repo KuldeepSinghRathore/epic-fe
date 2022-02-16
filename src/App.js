@@ -1,8 +1,11 @@
 import { Route, Routes } from "react-router-dom"
 import "./App.css"
-
+import "react-toastify/dist/ReactToastify.css"
+import { ToastContainer, toast } from "react-toastify"
 import { Footer } from "./Components/Layout/Footer"
 import { Navbar } from "./Components/Layout/Navbar"
+import { Loading } from "./Components/Loading/Loading"
+import { useData } from "./context/DataProvider"
 import { CartPage } from "./Pages/CartPage"
 import { CheckOutPage } from "./Pages/CheckOutPage"
 import { HomePage } from "./Pages/HomePage"
@@ -16,8 +19,16 @@ import { WishlistPage } from "./Pages/WishlistPage"
 import { PrivateRoutes } from "./Utils/PrivateRoutes"
 
 function App() {
+  const { productData } = useData()
+  if (productData.length === 0)
+    return (
+      <div className="bg-purple-100">
+        <Loading />
+      </div>
+    )
   return (
-    <div className="h-screen select-none">
+    <div className="h-screen select-none bg-purple-100">
+      <ToastContainer />
       <Navbar />
 
       <Routes>

@@ -30,8 +30,8 @@ export const ProductCard = ({ product, buttonName }) => {
   const { userId, token } = useAuth()
   const discountedPrice = price - parseInt((price * 15) / 100)
   return (
-    <div className="flex justify-center items-center p-1 bg-purple-100 ">
-      <div className="w-[90vw] md:w-full ">
+    <div className="flex justify-center items-center p-1 mx-auto bg-purple-100 ms">
+      <div className="max-w-[320px] md:w-full ">
         <div className="bg-white shadow-lg hover:shadow-xl rounded-lg ">
           <div
             className="bg-purple-400 h-64 w-[300px]  rounded-t-lg p-4 bg-no-repeat bg-center bg-cover"
@@ -153,13 +153,7 @@ export const ProductCard = ({ product, buttonName }) => {
                 </Link>
               )}
             </div>
-            {/* <div
-              className="w-1/2 p-1
-               
-               bg-gradient-to-r from-red-600 to-pink-500 rounded-full py-2 px-3 my-2 text-sm text-white hover:bg-pink-600 hover:from-pink-600 hover:to-pink-600 flex flex-row justify-center uppercase"
-            >
-              Add to cart
-            </div> */}
+
             {!buttonName && (
               <>
                 {isInCart ? (

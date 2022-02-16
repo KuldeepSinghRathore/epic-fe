@@ -1,5 +1,6 @@
 import React from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import { toast } from "react-toastify"
 import { useAuth } from "../context/AuthProvider"
 import { useCartContext } from "../context/CartProvider"
 import { useData } from "../context/DataProvider"
@@ -85,7 +86,7 @@ export const ProductDetail = () => {
                
                bg-gradient-to-r from-red-600 to-pink-500 rounded-full py-2 px-3 my-2 text-sm text-white hover:bg-pink-600 hover:from-pink-600 hover:to-pink-600 flex flex-row justify-center uppercase"
                 disabled={!detail.inStock}
-                onClick={() =>
+                onClick={() => {
                   addToCart(
                     productId,
                     userId,
@@ -94,7 +95,7 @@ export const ProductDetail = () => {
                     cartDispatch,
                     navigate
                   )
-                }
+                }}
               >
                 {detail.inStock ? "Add To Cart" : "Out of Stock"}
               </div>
