@@ -1,5 +1,6 @@
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, useNavigate } from "react-router-dom"
 import "./App.css"
+import { useEffect } from "react"
 import "react-toastify/dist/ReactToastify.css"
 import { ToastContainer } from "react-toastify"
 import { Footer } from "./Components/Layout/Footer"
@@ -18,9 +19,36 @@ import { RegisterPage } from "./Pages/RegisterPage"
 import { WishlistPage } from "./Pages/WishlistPage"
 import { PrivateRoutes } from "./Utils/PrivateRoutes"
 import { OrderHistoryPage } from "./Pages/OrderHistoryPage"
+import { setupAuthExceptionHandler, useAuth } from "./context/AuthProvider"
+import { useOrder } from "./context/OrderProvider"
+import { useCartContext } from "./context/CartProvider"
+import { useWishListContext } from "./context/WishListProvider"
 
 function App() {
   const { productData } = useData()
+  const { setUserId, setToken, setIsLogin } = useAuth()
+  const { orderData, setOrderData } = useOrder()
+  const { cartDispatch } = useCartContext()
+  const { wishlistDispatch } = useWishListContext()
+  const navigate = useNavigate()
+
+  const handleLogOut = () => {
+    localStorage.removeItem("userInfo")
+    setUserId(null)
+    setToken(null)
+    setOrderData({
+      orders: [],
+    })
+    cartDispatch({ type: "CLEAR_SESSION" })
+    wishlistDispatch({ type: "CLEAR_SESSION" })
+    setIsLogin(false)
+    navigate("/")
+  }
+  useEffect(() => {
+    setupAuthExceptionHandler(handleLogOut)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   if (productData.length === 0)
     return (
       <div className="bg-purple-100">

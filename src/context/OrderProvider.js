@@ -33,7 +33,7 @@ export const OrderProvider = ({ children }) => {
   }, [token, isOrder])
 
   return (
-    <OrderContext.Provider value={{ orderData, setIsOrder }}>
+    <OrderContext.Provider value={{ orderData, setIsOrder, setOrderData }}>
       {children}
     </OrderContext.Provider>
   )

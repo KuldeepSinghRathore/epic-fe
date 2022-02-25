@@ -38,14 +38,6 @@ export const AuthProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(savedIsLogin)
   const { isExpired } = useJwt(token)
 
-  const logoutUser = () => {
-    localStorage.removeItem("userInfo")
-    setUserId(null)
-    setToken(null)
-    setIsLogin(false)
-  }
-  setupAuthExceptionHandler(logoutUser)
-
   return (
     <AuthContext.Provider
       value={{

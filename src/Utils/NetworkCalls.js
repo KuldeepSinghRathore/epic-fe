@@ -292,6 +292,15 @@ export const addTowishlist = async (
   navigate
 ) => {
   if (token) {
+    toast("🦄 Add to Wishlist!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
     const status = await addTowishlistServer(productId, userId, token, item)
     if (status === 200) {
       dispatch({

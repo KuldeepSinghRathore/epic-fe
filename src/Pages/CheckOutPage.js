@@ -17,42 +17,49 @@ export const CheckOutPage = () => {
   const { setIsOrder } = useOrder()
 
   const [isVisible, setIsVisible] = useState(false)
+  // const [addressIdError, setAddressIdError] = useState("")
   const navigate = useNavigate()
   const { token } = useAuth()
   const handleOrder = async () => {
-    //    delete cart from server
-    toast("🦄 Order Placed!", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    })
+    // if ((addressState.selectedAddressId = "")) {
+    //   setAddressIdError("Please Tick Selected Address")
+    // }
+
     try {
-      const response = await axios.post(
-        `${API}/order/`,
-        {
-          orderItems: cartState.cart,
-          addressId: addressState.selectedAddressId,
-        },
-        {
+      if (addressState.selectedAddressId !== "") {
+        //    delete cart from server
+        toast("🦄 Order Placed!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+        const response = await axios.post(
+          `${API}/order/`,
+          {
+            orderItems: cartState.cart,
+            addressId: addressState.selectedAddressId,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+
+        const { status } = await axios.delete(`${API}/cart/`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
+        })
+        if (status === 200 && response.status === 200) {
+          setIsOrder((prev) => !prev)
+          cartDispatch({ type: "CLEAR_SESSION" })
+          navigate("/product")
         }
-      )
-
-      const { status } = await axios.delete(`${API}/cart/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      if (status === 200 && response.status === 200) {
-        setIsOrder((prev) => !prev)
-        cartDispatch({ type: "CLEAR_SESSION" })
-        navigate("/product")
       }
     } catch (error) {
       console.log(error)
@@ -85,12 +92,18 @@ export const CheckOutPage = () => {
       <div>
         <AddressShow />
       </div>
-      <div
-        onClick={handleOrder}
-        className="bg-gradient-to-r max-w-sm from-red-600 to-pink-500 rounded-full py-2 px-3 my-2 text-sm text-white hover:bg-pink-600 hover:from-pink-600 hover:to-pink-600 flex  flex-row justify-center uppercase cursor-pointer"
-      >
-        Order
-      </div>
+      {addressState.selectedAddressId !== "" ? (
+        <div
+          onClick={handleOrder}
+          className="bg-gradient-to-r max-w-sm from-red-600 to-pink-500 rounded-full py-2 px-3 my-2 text-sm text-white hover:bg-pink-600 hover:from-pink-600 hover:to-pink-600 flex  flex-row justify-center uppercase cursor-pointer"
+        >
+          Order
+        </div>
+      ) : (
+        <span className=" ml-4 bg-gradient-to-r max-w-sm from-red-600 to-pink-500 rounded-full py-2 px-3 my-2 text-sm text-white hover:bg-pink-600 hover:from-pink-600 hover:to-pink-600">
+          Select Address To Proceed
+        </span>
+      )}
     </div>
   )
 }

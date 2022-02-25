@@ -6,7 +6,7 @@ import { useWishListContext } from "../context/WishListProvider"
 
 export const LogOutPage = () => {
   const { setUserId, setToken, setIsLogin } = useAuth()
-  const { orderData } = useOrder()
+  const { orderData, setOrderData } = useOrder()
   const { cartDispatch } = useCartContext()
   const { wishlistDispatch } = useWishListContext()
   const navigate = useNavigate()
@@ -15,7 +15,9 @@ export const LogOutPage = () => {
     localStorage.removeItem("userInfo")
     setUserId(null)
     setToken(null)
-
+    setOrderData({
+      orders: [],
+    })
     cartDispatch({ type: "CLEAR_SESSION" })
     wishlistDispatch({ type: "CLEAR_SESSION" })
     setIsLogin(false)
