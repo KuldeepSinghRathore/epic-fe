@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthProvider"
 import { useCartContext } from "../context/CartProvider"
 import { useOrder } from "../context/OrderProvider"
 import { useWishListContext } from "../context/WishListProvider"
+import { useAddress } from "../context/AddressProvider"
 
 export const LogOutPage = () => {
   const { setUserId, setToken, setIsLogin } = useAuth()
@@ -10,7 +11,7 @@ export const LogOutPage = () => {
   const { cartDispatch } = useCartContext()
   const { wishlistDispatch } = useWishListContext()
   const navigate = useNavigate()
-
+  const { addressDispatch } = useAddress()
   const handleLogOut = () => {
     localStorage.removeItem("userInfo")
     setUserId(null)
@@ -18,6 +19,7 @@ export const LogOutPage = () => {
     setOrderData({
       orders: [],
     })
+    addressDispatch({ type: "CLEAR_SESSION" })
     cartDispatch({ type: "CLEAR_SESSION" })
     wishlistDispatch({ type: "CLEAR_SESSION" })
     setIsLogin(false)

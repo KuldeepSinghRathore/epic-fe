@@ -23,6 +23,7 @@ import { setupAuthExceptionHandler, useAuth } from "./context/AuthProvider"
 import { useOrder } from "./context/OrderProvider"
 import { useCartContext } from "./context/CartProvider"
 import { useWishListContext } from "./context/WishListProvider"
+import { useAddress } from "./context/AddressProvider"
 
 function App() {
   const { productData } = useData()
@@ -30,6 +31,7 @@ function App() {
   const { orderData, setOrderData } = useOrder()
   const { cartDispatch } = useCartContext()
   const { wishlistDispatch } = useWishListContext()
+  const { addressDispatch } = useAddress()
   const navigate = useNavigate()
 
   const handleLogOut = () => {
@@ -39,6 +41,7 @@ function App() {
     setOrderData({
       orders: [],
     })
+    addressDispatch({ type: "CLEAR_SESSION" })
     cartDispatch({ type: "CLEAR_SESSION" })
     wishlistDispatch({ type: "CLEAR_SESSION" })
     setIsLogin(false)
