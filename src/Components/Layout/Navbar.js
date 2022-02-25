@@ -6,7 +6,7 @@ import { useWishListContext } from "../../context/WishListProvider"
 
 export const Navbar = () => {
   const { filterState, filterDispatch } = useFilter()
-  const atHomePage = useLocation().pathname === "/"
+  const atProductPage = useLocation().pathname === "/product"
   const { cartState } = useCartContext()
   const { wishlistState } = useWishListContext()
 
@@ -23,36 +23,38 @@ export const Navbar = () => {
             </h1>
           </Link>
         </div>
-        <div className="flex-1 flex justify-end  p-1 border-2 ">
-          <input
-            type="text"
-            placeholder={
-              atHomePage ? "Works At Product Page Use Shop Now" : "Search"
-            }
-            disabled={atHomePage}
-            value={filterState.searchQuery}
-            className="w-full focus-within:text-purple-600 placeholder-purple-500 outline-purple-700 "
-            onChange={(e) =>
-              filterDispatch({ type: "SEARCH", payload: e.target.value })
-            }
-          />
-          <span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 font-semibold pointer-events-none text-purple-600"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </span>
-        </div>
+        {atProductPage && (
+          <div className="flex-1 flex justify-end  p-1 border-2 ">
+            <input
+              type="text"
+              placeholder={
+                !atProductPage ? "Works At Product Page Use Shop Now" : "Search"
+              }
+              disabled={!atProductPage}
+              value={filterState.searchQuery}
+              className="w-full focus-within:text-purple-600 placeholder-purple-500 outline-purple-700 "
+              onChange={(e) =>
+                filterDispatch({ type: "SEARCH", payload: e.target.value })
+              }
+            />
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 font-semibold pointer-events-none text-purple-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </span>
+          </div>
+        )}
         <div className="flex-1 flex justify-end gap-3">
           <span
             className="relative inline-block "

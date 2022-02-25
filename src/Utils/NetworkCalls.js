@@ -168,8 +168,6 @@ export const removeFromwishlist = async (
         type: "REMOVE_FROM_WISHLIST",
         payload: productId,
       })
-    } else {
-      navigate("/login")
     }
   } else {
     navigate("/login")
@@ -197,8 +195,6 @@ export const addToCart = async (
 
     if (status === 200) {
       dispatch({ type: "ADD_TO_CART", payload: item })
-    } else {
-      navigate("/login")
     }
   } else {
     navigate("/login")
@@ -224,8 +220,6 @@ export const removeFromCart = async (
     const status = await removeFromCartServer(productId, userId, token)
     if (status === 200) {
       dispatch({ type: "REMOVE_FROM_CART", payload: productId })
-    } else {
-      navigate("/login")
     }
   } else {
     navigate("/login")
@@ -240,15 +234,6 @@ export const increaseQuantity = async (
   navigate,
   dispatch
 ) => {
-  toast("🦄 Increasing Quantity!", {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  })
   const quantity = item?.quantity + 1
   if (token) {
     const status = await increaseQuantityServer(
@@ -262,8 +247,6 @@ export const increaseQuantity = async (
         type: "INCREASE_QUANTITY",
         payload: productId,
       })
-    } else {
-      navigate("/login")
     }
   } else {
     navigate("/login")
@@ -280,15 +263,6 @@ export const decreaseQuantity = async (
   const quantity = item?.quantity - 1
   if (quantity > 0) {
     if (token) {
-      toast("🦄 Decreasing Quantity!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      })
       const status = await decreaseQuantityServer(
         productId,
         userId,
@@ -302,8 +276,6 @@ export const decreaseQuantity = async (
           type: "DECREASE_QUANTITY",
           payload: productId,
         })
-      } else {
-        navigate("/login")
       }
     } else {
       navigate("/login")
@@ -326,8 +298,6 @@ export const addTowishlist = async (
         type: "ADD_TO_WISHLIST",
         payload: item,
       })
-    } else {
-      navigate("/login")
     }
   } else {
     navigate("/login")

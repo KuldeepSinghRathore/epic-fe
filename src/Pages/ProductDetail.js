@@ -1,6 +1,5 @@
 import React from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { toast } from "react-toastify"
 import { useAuth } from "../context/AuthProvider"
 import { useCartContext } from "../context/CartProvider"
 import { useData } from "../context/DataProvider"
@@ -64,12 +63,6 @@ export const ProductDetail = () => {
         </div>
         <div className="flex justify-end items-end px-2 pb-2">
           <div className=" p-1 ">
-            {/* <spa
-              to="/cart"
-              className="bg-gradient-to-r from-red-600 to-pink-500 rounded-full py-2 px-3 my-2 text-sm text-white hover:bg-pink-600 hover:from-pink-600 hover:to-pink-600 flex flex-row justify-center uppercase"
-            >
-              Add to cart
-            </spa> */}
             {isAlreadyExist(productId, cartState.cart) ? (
               <span
                 className="

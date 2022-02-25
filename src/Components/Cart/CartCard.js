@@ -33,22 +33,24 @@ export const CartCard = ({ product }) => {
         </div>
       </div>
       <div className="flex justify-center w-1/5">
-        <svg
-          onClick={() =>
-            decreaseQuantity(
-              productId,
-              userId,
-              token,
-              product,
-              navigate,
-              cartDispatch
-            )
-          }
-          className="fill-current text-purple-600 w-3"
-          viewBox="0 0 448 512"
-        >
-          <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-        </svg>
+        {product.quantity !== 1 && (
+          <svg
+            onClick={() =>
+              decreaseQuantity(
+                productId,
+                userId,
+                token,
+                product,
+                navigate,
+                cartDispatch
+              )
+            }
+            className="fill-current text-purple-600 w-3"
+            viewBox="0 0 448 512"
+          >
+            <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+          </svg>
+        )}
         <div className="mx-2 border text-center w-8">{product.quantity}</div>
         <svg
           onClick={() =>

@@ -22,7 +22,6 @@ export const RegisterPage = () => {
     })
   }
   const signUpHandler = async (e) => {
-    console.log(signUpDetails)
     try {
       e.preventDefault()
       const { firstName, lastName, email, password } = signUpDetails

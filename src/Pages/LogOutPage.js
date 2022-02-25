@@ -1,13 +1,16 @@
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthProvider"
 import { useCartContext } from "../context/CartProvider"
+import { useOrder } from "../context/OrderProvider"
 import { useWishListContext } from "../context/WishListProvider"
 
 export const LogOutPage = () => {
   const { setUserId, setToken, setIsLogin } = useAuth()
+  const { orderData } = useOrder()
   const { cartDispatch } = useCartContext()
   const { wishlistDispatch } = useWishListContext()
   const navigate = useNavigate()
+
   const handleLogOut = () => {
     localStorage.removeItem("userInfo")
     setUserId(null)
@@ -34,6 +37,14 @@ export const LogOutPage = () => {
       >
         Home
       </button>
+      {orderData.orders.length !== 0 && (
+        <button
+          className="bg-purple-500 mb-10 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => navigate("/orders")}
+        >
+          Orders
+        </button>
+      )}
       <button
         className="bg-purple-500 mb-10 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
         onClick={() => navigate("/product")}

@@ -10,23 +10,26 @@ import { CartProvider } from "./context/CartProvider"
 import { AuthProvider } from "./context/AuthProvider"
 import { WishlistProvider } from "./context/WishListProvider"
 import { AddressProvider } from "./context/AddressProvider"
+import { OrderProvider } from "./context/OrderProvider"
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
-      <FilterProvider>
-        <AddressProvider>
-          <DataProvider>
-            <WishlistProvider>
-              <CartProvider>
-                <BrowserRouter>
-                  <App />
-                </BrowserRouter>
-              </CartProvider>
-            </WishlistProvider>
-          </DataProvider>
-        </AddressProvider>
-      </FilterProvider>
+      <OrderProvider>
+        <FilterProvider>
+          <AddressProvider>
+            <DataProvider>
+              <WishlistProvider>
+                <CartProvider>
+                  <BrowserRouter>
+                    <App />
+                  </BrowserRouter>
+                </CartProvider>
+              </WishlistProvider>
+            </DataProvider>
+          </AddressProvider>
+        </FilterProvider>
+      </OrderProvider>
     </AuthProvider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -4,7 +4,7 @@ import { useAddress } from "../../context/AddressProvider"
 import { useAuth } from "../../context/AuthProvider"
 import { API } from "../../Utils/API"
 export const CheckOut = () => {
-  const { addressDispatch } = useAddress()
+  const { fetchAddress } = useAddress()
   const { token } = useAuth()
   const [AddressData, setAddressData] = useState({
     city: "",
@@ -30,10 +30,8 @@ export const CheckOut = () => {
         },
       })
       if (status === 200) {
-        addressDispatch({
-          type: "ADD_TO_ADDRESS",
-          payload: AddressData,
-        })
+        fetchAddress(token)
+
         setAddressData({
           city: "",
           state: "",

@@ -6,7 +6,7 @@ export const Filter = () => {
   return (
     <div className="p-7 bg-purple-200 h-screen  md:w-[25vw] text-purple-800 ">
       <fieldset className="flex flex-col">
-        <label className="p-1">
+        <div className="flex items-center gap-1">
           <input
             type="radio"
             name="sort"
@@ -14,9 +14,9 @@ export const Filter = () => {
             defaultChecked={filterState.sortBy === "lowtohigh"}
             className="form-radio text-purple-300"
           />
-          <span className="ml-2">Low to High</span>
-        </label>
-        <label className="p-1">
+          <label className="p-1 ">Low to High</label>
+        </div>
+        <div className="flex items-center gap-1">
           <input
             type="radio"
             name="sort"
@@ -24,26 +24,27 @@ export const Filter = () => {
             onChange={() => filterDispatch({ type: "HIGH_TO_LOW" })}
             defaultChecked={filterState.sortBy === "hightolow"}
           />
-          <span className="ml-2">High to Low</span>
-        </label>
-        <label htmlFor="">
+          <label className="p-1">High to Low</label>
+        </div>
+        <div className="flex items-center gap-1">
           <input
             type="checkbox"
             className="h-4 w-4 checked:bg-purple-500"
             defaultChecked={!filterState.showInventoryAll}
             onClick={() => filterDispatch({ type: "SHOW_INVENTORY_ALL" })}
           />
-          <span className="ml-2"> Out of Stock</span>
-        </label>
-        <label className="p-1">
+          <label htmlFor="">Out of Stock</label>
+        </div>
+        <div className="flex items-center gap-1">
           <input
             type="checkbox"
             defaultChecked={filterState.fastdelivery}
             onClick={() => filterDispatch({ type: "FAST_DELIVERY" })}
             className="h-4 w-4 checked:bg-purple-500"
           />
-          <span className="ml-2 capitalize">fast delivery only</span>
-        </label>
+          <label className="p-1 capitalize">fast delivery only</label>
+        </div>
+
         <label className="p-1">
           <input
             type="range"

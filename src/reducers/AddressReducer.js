@@ -1,7 +1,9 @@
-export const AddressReducer = (state = {}, action) => {
+export const AddressReducer = (state, action) => {
   switch (action.type) {
     case "LOAD_ADDRESS":
       return { ...state, address: action.payload }
+    case "SETID":
+      return { ...state, selectedAddressId: action.payload }
     case "ADD_TO_ADDRESS":
       return {
         ...state,
@@ -19,10 +21,12 @@ export const AddressReducer = (state = {}, action) => {
           item._id === action.payload._id ? action.payload : item
         ),
       }
+
     case "CLEAR_SESSION":
       return {
-        ...state,
         address: [],
+        selectedAddress: {},
+        selectedAddressId: "",
       }
     default:
       return state
